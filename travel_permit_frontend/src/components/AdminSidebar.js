@@ -24,7 +24,7 @@ const AdminSidebar = () => {
       const currentDate = new Date();
       const currentHour = currentDate.getHours();
 
-      if (currentHour >= 11 && currentHour < 12) {
+      if (currentHour >= 11 && currentHour < 23) {
         setTakkal(true);
       } else {
         setTakkal(false);

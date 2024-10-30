@@ -58,6 +58,8 @@ const MyPermits = () => {
               <p><strong>Vehicle Mode:</strong> {permit.vehicleMode}</p>
               <p><strong>Amount:</strong> {permit.amount}</p>
               <p><strong>Status:</strong> {permit.status}</p>
+              <p style={{color:"red"}}><strong>Type:</strong> {permit.type}</p>
+
             </div>
           ))
         ) : (

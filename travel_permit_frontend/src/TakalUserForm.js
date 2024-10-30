@@ -18,7 +18,8 @@ const TakalUserForm = () => {
 
 
     const email = localStorage.getItem("Email");
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem("token");
+    const type = "Takal";
 
     const statesAndUTs = [
         "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", 
@@ -127,9 +128,10 @@ const TakalUserForm = () => {
         vehicleMode,
         amount,
         email,
+        type
       };
   
-      fetch("http://localhost:8080/user/tatkal-application", {
+      fetch("http://localhost:8080/user/normal-application", {
         method: "POST",
         headers: { "Content-Type": "application/json" ,"Authorization":`Bearer ${token}`},
         body: JSON.stringify(detail),

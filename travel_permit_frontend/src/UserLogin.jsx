@@ -111,7 +111,7 @@ export default function UserLogin({ setIsAuthenticated, setUserRole }) {
               {passwordError}
             </span>
           )}
-          <br />
+      
           <button onClick={handleLogin} disabled={loading}>
             <b>{loading ? "Logging in..." : "Login"}</b>
           </button>

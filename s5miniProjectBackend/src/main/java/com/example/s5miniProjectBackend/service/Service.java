@@ -1,6 +1,5 @@
 package com.example.s5miniProjectBackend.service;
 
-import com.example.s5miniProjectBackend.entity.TakalUser;
 import com.example.s5miniProjectBackend.entity.UserForm;
 
 import java.util.List;
@@ -8,7 +7,7 @@ import java.util.List;
 public interface Service {
     UserForm savedetails(UserForm userForm);
     
-    public TakalUser savetakaldetails(TakalUser detail);
+
     
 
 
@@ -30,9 +29,9 @@ public interface Service {
 
     List<UserForm> getPassedList();
 
-    List<TakalUser> getPendingTakkalUser();
+    List<UserForm> getPendingTakkalUser();
 
-    TakalUser takkalApproved(Integer id);
+    UserForm takkalApproved(Integer id);
 
     long getApprovedCount();
     long countApprovedUserFormsByEmail(String email);

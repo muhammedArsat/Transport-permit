@@ -14,6 +14,7 @@ function Form() {
   const [vehicleMode, setVehicleMode] = useState('');
   const [amount, setAmount] = useState('');
   const [errors, setErrors] = useState({});
+  const[type,setType] = useState("Normal")
 
   const email =localStorage.getItem("Email");
 
@@ -133,6 +134,7 @@ function Form() {
       vehicleMode,
       amount,
       email,
+      type
     };
 
     fetch("http://localhost:8080/user/normal-application", {

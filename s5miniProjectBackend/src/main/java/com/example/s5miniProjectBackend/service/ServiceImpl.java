@@ -1,8 +1,6 @@
 package com.example.s5miniProjectBackend.service;
 
-import com.example.s5miniProjectBackend.entity.TakalUser;
 import com.example.s5miniProjectBackend.entity.UserForm;
-import com.example.s5miniProjectBackend.repository.TakalUserRepository;
 import com.example.s5miniProjectBackend.repository.UserFormRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,18 +15,15 @@ public class ServiceImpl implements Service{
 
 
     
-    @Autowired
-    public TakalUserRepository takaluserRepository;
+//    @Autowired
+//    public TakalUserRepository takaluserRepository;
 
     @Override
     public UserForm savedetails(UserForm userForm) {
         return userFormRepository.save(userForm);
     }
     
-    @Override
-	public TakalUser savetakaldetails(TakalUser detail) {
-		return takaluserRepository.save(detail);
-	}
+
     
 
 
@@ -58,7 +53,8 @@ public class ServiceImpl implements Service{
 
     @Override
     public List<UserForm> getPendingList() {
-        return userFormRepository.findByStatus("pending");
+
+        return userFormRepository.findByTypeAndStatus("Normal","pending");
     }
 
     @Override
@@ -85,18 +81,19 @@ public class ServiceImpl implements Service{
     }
 
     @Override
-    public List<TakalUser> getPendingTakkalUser() {
-        return takaluserRepository.findByStatus("pending");
+    public List<UserForm> getPendingTakkalUser() {
+        return   userFormRepository.findByTypeAndStatus("Takal","pending");
+
     }
 
     @Override
-    public TakalUser takkalApproved(Integer id) {
-        Optional<TakalUser> existingTakal = takaluserRepository.findById(id);
+    public UserForm takkalApproved(Integer id) {
+        Optional<UserForm> existingTakal = userFormRepository.findById(id);
         if(existingTakal.isPresent())
         {
-            TakalUser takalUser = existingTakal.get();
+            UserForm takalUser = existingTakal.get();
             takalUser.setStatus("Approved");
-            takaluserRepository.save(takalUser);
+            userFormRepository.save(takalUser);
         }
 
             return null;

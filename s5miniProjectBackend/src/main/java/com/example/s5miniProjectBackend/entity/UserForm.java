@@ -32,8 +32,16 @@ public class UserForm {
 // Getters and setters
 
 private String status = "pending";
+    private  String type;
 
-    // Getters and setters
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+// Getters and setters
 
     public String getVehicleMode() {
         return vehicleMode;

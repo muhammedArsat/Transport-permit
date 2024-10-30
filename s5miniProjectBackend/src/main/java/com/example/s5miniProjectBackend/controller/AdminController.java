@@ -1,6 +1,5 @@
 package com.example.s5miniProjectBackend.controller;
 
-import com.example.s5miniProjectBackend.entity.TakalUser;
 import com.example.s5miniProjectBackend.entity.UserForm;
 import com.example.s5miniProjectBackend.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +22,9 @@ public class AdminController {
 
 
     @GetMapping("/takkal-list")
-    public ResponseEntity<List<TakalUser>> getTakkalPendingList()
+    public ResponseEntity<List<UserForm>> getTakkalPendingList()
     {
-        List<TakalUser> takalUsers = service.getPendingTakkalUser();
+        List<UserForm> takalUsers  = service.getPendingTakkalUser();
         return ResponseEntity.ok(takalUsers);
     }
 
@@ -34,9 +33,9 @@ public class AdminController {
     Takal Lists Status Changing
      */
     @PutMapping("/takkal-list/{id}")
-    ResponseEntity<TakalUser> takkalStatusChange(@PathVariable Integer id)
+    ResponseEntity<UserForm> takkalStatusChange(@PathVariable Integer id)
     {
-        TakalUser takalUser = service.takkalApproved(id);
+        UserForm takalUser = service.takkalApproved(id);
         return ResponseEntity.ok(takalUser);
     }
 

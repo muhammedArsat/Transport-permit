@@ -1,6 +1,5 @@
 package com.example.s5miniProjectBackend.controller;
 
-import com.example.s5miniProjectBackend.entity.TakalUser;
 import com.example.s5miniProjectBackend.entity.UserForm;
 import com.example.s5miniProjectBackend.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,11 +47,7 @@ public class UserController {
     User Takkal Form Registration
      */
 
-    @PostMapping("/tatkal-application")
-    public String takaladd(@RequestBody TakalUser detail) {
-        service.savetakaldetails(detail);
-        return "User Details Added Successfully!!!";
-    }
+
 
     /*
     *  *************************************************************************************************
