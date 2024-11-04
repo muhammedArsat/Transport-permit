@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './css/UserForm.css';
+import loadingImg from "./images/loginload.svg"
 
 function Form() {
   const token = localStorage.getItem("token");
@@ -15,6 +16,7 @@ function Form() {
   const [amount, setAmount] = useState('');
   const [errors, setErrors] = useState({});
   const[type,setType] = useState("Normal")
+  const[loading,setLoading] = useState(true);
 
   const email =localStorage.getItem("Email");
 
@@ -196,11 +198,20 @@ function Form() {
     }
   };
 
+  useEffect(()=>{
+    setTimeout (() =>{
+      setLoading(false)
+    },1500)
+  },[loading])
+
   return (
     <div>
+ { loading ? <div className='loading'><img src={loadingImg} alt="loading pic" /></div>:
       <div style={{ display: 'flex' }}>
-       
+      
+
         <div className="form">
+          
           <h1 className="form-head">USER DETAILS</h1>
           <form className="form-body">
             <div className="form-group">
@@ -348,9 +359,11 @@ function Form() {
             </div>
           </form>
         </div>
-      </div>
-    </div>
-  );
-}
 
+      </div>
+}
+    </div>
+    );
+
+  }
 export default Form;

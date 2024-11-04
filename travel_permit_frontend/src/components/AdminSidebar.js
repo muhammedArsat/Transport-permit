@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import { FaWpforms } from "react-icons/fa";
@@ -6,9 +6,11 @@ import { MdSpaceDashboard } from "react-icons/md";
 import { SlLogout } from "react-icons/sl";
 import { FaClipboardList } from "react-icons/fa";
 import { TiTick } from "react-icons/ti";
+import { MdOutlineDarkMode } from "react-icons/md";
+import { MdDarkMode } from "react-icons/md";
+
 
 import "../css/Sb.css";
-
 
 const AdminSidebar = () => {
   const role = localStorage.getItem("role");
@@ -16,11 +18,23 @@ const AdminSidebar = () => {
   const handleLogout = () => {
     localStorage.removeItem("Token");
     localStorage.removeItem("role");
+    localStorage.removeItem("isDarkTheme");
     window.location.href = "/"; // Redirect to the login page
   };
 
   const [isSidebarOpen, SetSidebarOpen] = useState(false);
 
+  const [isDarkTheme, setIsDarkTheme] = useState(() => {
+    return localStorage.getItem("isDarkTheme") === "true";
+  });
+
+  const handleTheme = () => {
+    setIsDarkTheme((currentvalue) => !currentvalue);
+  };
+  useEffect(() => {
+    document.body.className = isDarkTheme ? "dark-theme" : "light-theme";
+    localStorage.setItem("isDarkTheme", isDarkTheme);
+  }, [isDarkTheme]);
   const toggleSideBar = () => {
     SetSidebarOpen(!isSidebarOpen);
   };
@@ -43,7 +57,6 @@ const AdminSidebar = () => {
     return () => clearInterval(interval);
   }, []);
 
-
   return (
     <div>
       <div className="sb-mob">
@@ -65,20 +78,31 @@ const AdminSidebar = () => {
           {role === "USER" && (
             <>
               <a href="/user-home">
-                <li>Home    <FaHome className="nav-icons"/>
-               
+                <li>
+                  Home <FaHome className="nav-icons" />
                 </li>
               </a>
               <a href="/user-form">
-                <li>Normal Form <FaWpforms  className="nav-icons"/></li>
+                <li>
+                  Normal Form <FaWpforms className="nav-icons" />
+                </li>
               </a>
               {isTakkal ? (
-            <Link to={`/takal-form`}><li>Takkaal Form <FaClipboardList className="nav-icons"/></li></Link>
-          ) : (
-            <li style={{ color: "gray" }}>Takkal Form (only open between 11 am to 12 pm)<FaClipboardList className="nav-icons"/></li>
-          )}
+                <Link to={`/takal-form`}>
+                  <li>
+                    Takkaal Form <FaClipboardList className="nav-icons" />
+                  </li>
+                </Link>
+              ) : (
+                <li style={{ color: "gray" }}>
+                  Takkal Form (only open between 11 am to 12 pm)
+                  <FaClipboardList className="nav-icons" />
+                </li>
+              )}
               <a href="/user-dashboard">
-                <li>Dashboard <MdSpaceDashboard className="nav-icons"/></li>
+                <li>
+                  Dashboard <MdSpaceDashboard className="nav-icons" />
+                </li>
               </a>
               <a href="user-profile">
                 <li>Profile</li>
@@ -88,36 +112,55 @@ const AdminSidebar = () => {
           {role === "ADMIN" && (
             <>
               <a href="/admin-landingpage">
-                <li>Home  <FaHome className="nav-icons"/></li>
+                <li>
+                  Home <FaHome className="nav-icons" />
+                </li>
               </a>
 
               <a href="/takkal-pending">
-                <li>Tatkkal List <FaClipboardList className="nav-icons"/></li>
+                <li>
+                  Tatkkal List <FaClipboardList className="nav-icons" />
+                </li>
               </a>
               <a href="/admin-approve">
-                <li>Pending Lists<FaWpforms  className="nav-icons"/></li>
+                <li>
+                  Pending Lists
+                  <FaWpforms className="nav-icons" />
+                </li>
               </a>
               <a href="/approved-list">
-                <li>Approved List <TiTick className="nav-icons"/></li>
+                <li>
+                  Approved List <TiTick className="nav-icons" />
+                </li>
               </a>
               <a href="/passed-list">
-                <li>Passed List<TiTick className="nav-icons"/></li>
+                <li>
+                  Passed List
+                  <TiTick className="nav-icons" />
+                </li>
               </a>
             </>
           )}
 
           {role === "VERIFIER" && (
             <>
-             <a href="/check-home">
-             <li>Home  <FaHome className="nav-icons"/></li>
+              <a href="/check-home">
+                <li>
+                  Home <FaHome className="nav-icons" />
+                </li>
               </a>
               <a href="/check-verify">
-                <li>Pending Lists<FaWpforms  className="nav-icons"/></li>
+                <li>
+                  Pending Lists
+                  <FaWpforms className="nav-icons" />
+                </li>
               </a>
             </>
           )}
-
-          <li onClick={handleLogout}>Logout <SlLogout className="nav-icons"/></li>
+          <li onClick={handleTheme} > {isDarkTheme ? "Light Mode" : "Dark Mode"}{isDarkTheme ? <MdDarkMode/> : <MdOutlineDarkMode/>} </li>
+          <li onClick={handleLogout}>
+            Logout <SlLogout className="nav-icons" />
+          </li>
         </ul>
       </div>
     </div>

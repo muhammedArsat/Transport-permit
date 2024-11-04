@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom"; // Import Link for navigation
  // Importing the Sidebar component
 import './css/UserDashboard.css'; // Create a separate CSS file for dashboard styling
+import loadingImg from "./images/loginload.svg"
+
 
 const UserDashboard = () => {
   const [approvedCount, setApprovedCount] = useState(0);
@@ -9,6 +11,14 @@ const UserDashboard = () => {
   const [totApplicationCount, settotApplicationCount] = useState(0);
   const email = localStorage.getItem("Email");
   const token = localStorage.getItem("token");
+  const [loading,isLoading] = useState(true);
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      isLoading(false);
+    },1500)
+
+  },[loading])
 
   useEffect(() => {
     
@@ -64,8 +74,9 @@ const UserDashboard = () => {
 
   return (
     <div className="dashboard-container">
-
+      { loading ? <div className="loading"> <img src={loadingImg} alt="loading pic" /></div> :
       <div className="dashboard">
+        
         <h2>Dashboard</h2>
         <div className="counts-container">
           <div className="count-card">
@@ -86,6 +97,7 @@ const UserDashboard = () => {
           butt">My Permits</button>
         </Link>
       </div>
+}
     </div>
   );
 };

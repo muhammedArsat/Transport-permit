@@ -200,8 +200,9 @@ const TakalUserForm = () => {
       }
     };
       return (
+    
           <div>
-          
+      
                     <div className="form">
                     <h1 className="form-head">Tatkaal User Details</h1>
                     <form className="form-body">

@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import Sb from "./sb";
 import './css/MyPermit.css';
+import loadingImg from "./images/loginload.svg"
+
 
 const MyPermits = () => {
   const token = localStorage.getItem("token");
@@ -34,13 +36,16 @@ const MyPermits = () => {
     }
   }, [email]);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  useEffect(()=>{
+    setTimeout(() =>{
+setLoading(false)
+    },1500)
+  },[loading])
 
   return (
     <div>
-  
+      {loading ? <div className="loading"> <img src={loadingImg} alt="loading pic"/></div> :
+
     <div className="permits-page">
       <h2>My Permits</h2>
       <div className="card-container">
@@ -67,6 +72,7 @@ const MyPermits = () => {
         )}
       </div>
     </div>
+}
     </div>
   );
 };

@@ -3,6 +3,7 @@ import img from "./images/TP_logo.png";
 import "./App.css";
 import { Link, useNavigate } from "react-router-dom";
 import UserService from './UserService';
+import loadingImg from './images/loginload.svg'
 import axios from "axios";
 
 export default function UserLogin({ setIsAuthenticated, setUserRole }) {
@@ -113,7 +114,7 @@ export default function UserLogin({ setIsAuthenticated, setUserRole }) {
           )}
       
           <button onClick={handleLogin} disabled={loading}>
-            <b>{loading ? "Logging in..." : "Login"}</b>
+            <b>{loading ? <img src={loadingImg}  alt="loadingPic"   style={{ width: "15px", height: "15px" }}/> : "Login"}</b>
           </button>
           <p>New User? <Link to="/user-register" style={{color:"Black"}}>Register Now</Link></p>
         </div>

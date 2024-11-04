@@ -2,13 +2,13 @@
 .permits-page {
     margin-left: 250px; /* Account for sidebar width */
     padding: 20px;
-    background-color: #f9f9f9;
+ 
   }
   
   .permits-page h2 {
     font-size: 24px;
     margin-bottom: 20px;
-    color: #333;
+  
     text-align: center;
   }
   
@@ -20,7 +20,7 @@
   }
   
   .card {
-    background-color: #fff;
+  
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 15px;
@@ -39,7 +39,7 @@
   
   .card p {
     margin: 5px 0;
-    color: #555;
+
   }
   
   @media (max-width: 768px) {

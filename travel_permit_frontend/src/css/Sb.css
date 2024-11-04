@@ -19,7 +19,7 @@ body{
     color: white;
     transform: translateX(0);
     transition: transform 1s ease-in;
-    width: 250px;
+    width: 200px;
     z-index: 2;
     font-family: 'poppins';
   
@@ -34,7 +34,7 @@ body{
 }
 .sb ul li{
     list-style: none;
-    padding: 20px;
+    padding: 15px;
 }
 
 .sb li:hover{
@@ -58,6 +58,7 @@ body{
         hsl(240, 94%, 6%)
       );
     width: 100vw;
+    height:75px;
     align-items: center; /* Ensures vertical alignment in row */
     padding: 15px;
     margin: 0;
@@ -106,4 +107,17 @@ right: 0px;
         cursor: pointer;
     }
   
+}
+
+body.dark-theme{
+    background-color:#000000;
+    color: white;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+body.light-theme{
+    background-color: white;
+    color: black;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+
 }
