@@ -21,6 +21,8 @@ import AdminLayout from './AdminLayout';
 import VerifierLayout from './VerifierLayout';
 import UserService from './UserService';
 import AdminSidebar from './components/AdminSidebar';
+import NotFound from './NotFound';
+import UserProfile from './UserProfile';
 
 function App() {
     const [loading, setLoading] = useState(true);
@@ -72,6 +74,7 @@ function App() {
                         <Route path="/user-form" element={<ProtectedRoute role="USER"><UserForm /></ProtectedRoute>} />
                         <Route path="/takal-form" element={<ProtectedRoute role="USER"><TakalUserForm /></ProtectedRoute>} />
                         <Route path="/user-dashboard" element={<ProtectedRoute role="USER"><UserDashboard /></ProtectedRoute>} />
+                        <Route path="/user-profile" element={<ProtectedRoute role ="USER"><UserProfile/></ProtectedRoute>}/>
                         <Route path="/my-permits" element={<ProtectedRoute role="USER"><MyPermits /></ProtectedRoute>} />
                     </Route>
 
@@ -91,7 +94,7 @@ function App() {
                     </Route>
 
                     {/* Redirect to login for any undefined routes */}
-                    <Route path="*" element={<Navigate to="/" />} />
+                    <Route path="*" element={<NotFound/>}/>
                 </Routes>
             </div>
         </BrowserRouter>

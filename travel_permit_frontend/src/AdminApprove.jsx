@@ -28,7 +28,7 @@ export default function Approval() {
         setLoading(false);
       } catch (error) {
         setError(error);
-        setLoading(false);
+        setLoading(true);
       }
     };
     fetchData();

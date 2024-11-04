@@ -225,5 +225,8 @@
     .whiteBox a{
       margin-left:200px;
     }
+    p{
+      font-size: 10px;
+    }
   }
   

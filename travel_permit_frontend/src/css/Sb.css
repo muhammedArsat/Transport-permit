@@ -19,7 +19,7 @@ body{
     color: white;
     transform: translateX(0);
     transition: transform 1s ease-in;
-    width: 200px;
+    width: 250px;
     z-index: 2;
     font-family: 'poppins';
   
@@ -69,7 +69,12 @@ body{
 }
 .sb a{
     text-decoration: none;
+
     color:white;
+}
+.nav-icons{
+    position: relative;
+right: 0px;
 }
 
 @media(max-width:768px)
@@ -94,6 +99,7 @@ body{
         display: flex; /* Ensure it becomes visible on mobile */
         align-items: center;
         justify-content: space-between;
+
 
     }
     .sb-mob:hover{

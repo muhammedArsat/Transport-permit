@@ -1,8 +1,14 @@
 import React, { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
+import { FaHome } from "react-icons/fa";
+import { FaWpforms } from "react-icons/fa";
+import { MdSpaceDashboard } from "react-icons/md";
+import { SlLogout } from "react-icons/sl";
+import { FaClipboardList } from "react-icons/fa";
+import { TiTick } from "react-icons/ti";
+
 import "../css/Sb.css";
 
-import { useNavigate } from "react-router-dom";
 
 const AdminSidebar = () => {
   const role = localStorage.getItem("role");
@@ -24,7 +30,7 @@ const AdminSidebar = () => {
       const currentDate = new Date();
       const currentHour = currentDate.getHours();
 
-      if (currentHour >= 11 && currentHour < 23) {
+      if (currentHour >= 11 && currentHour < 12) {
         setTakkal(true);
       } else {
         setTakkal(false);
@@ -59,38 +65,43 @@ const AdminSidebar = () => {
           {role === "USER" && (
             <>
               <a href="/user-home">
-                <li>Home</li>
+                <li>Home    <FaHome className="nav-icons"/>
+               
+                </li>
               </a>
               <a href="/user-form">
-                <li>Normal Application</li>
+                <li>Normal Form <FaWpforms  className="nav-icons"/></li>
               </a>
               {isTakkal ? (
-            <Link to={`/takal-form`}><li>Takkaal Form</li></Link>
+            <Link to={`/takal-form`}><li>Takkaal Form <FaClipboardList className="nav-icons"/></li></Link>
           ) : (
-            <li style={{ color: "gray" }}>Takkal Form (only open between 11 am to 12 pm)</li>
+            <li style={{ color: "gray" }}>Takkal Form (only open between 11 am to 12 pm)<FaClipboardList className="nav-icons"/></li>
           )}
               <a href="/user-dashboard">
-                <li>Dashboard</li>
+                <li>Dashboard <MdSpaceDashboard className="nav-icons"/></li>
+              </a>
+              <a href="user-profile">
+                <li>Profile</li>
               </a>
             </>
           )}
           {role === "ADMIN" && (
             <>
               <a href="/admin-landingpage">
-                <li>Home</li>
+                <li>Home  <FaHome className="nav-icons"/></li>
               </a>
 
               <a href="/takkal-pending">
-                <li>Tatkkal List</li>
+                <li>Tatkkal List <FaClipboardList className="nav-icons"/></li>
               </a>
               <a href="/admin-approve">
-                <li>Pending Lists</li>
+                <li>Pending Lists<FaWpforms  className="nav-icons"/></li>
               </a>
               <a href="/approved-list">
-                <li>Approved List</li>
+                <li>Approved List <TiTick className="nav-icons"/></li>
               </a>
               <a href="/passed-list">
-                <li>Passed List</li>
+                <li>Passed List<TiTick className="nav-icons"/></li>
               </a>
             </>
           )}
@@ -98,15 +109,15 @@ const AdminSidebar = () => {
           {role === "VERIFIER" && (
             <>
              <a href="/check-home">
-                <li>Home</li>
+             <li>Home  <FaHome className="nav-icons"/></li>
               </a>
               <a href="/check-verify">
-                <li>Pending Lists</li>
+                <li>Pending Lists<FaWpforms  className="nav-icons"/></li>
               </a>
             </>
           )}
 
-          <li onClick={handleLogout}>Logout</li>
+          <li onClick={handleLogout}>Logout <SlLogout className="nav-icons"/></li>
         </ul>
       </div>
     </div>
