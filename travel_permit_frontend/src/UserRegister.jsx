@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import img from "./images/TP_logo.png";
 import "./css/LoginRegister.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
+import loadingImg from "./images/loginload.svg";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -11,12 +12,15 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("USER");
-  
+
+  const [loading, setLoading] = useState(false);
+
   // Error state for validation
   const [nameError, setNameError] = useState("");
   const [numberError, setNumberError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [error, setError] = useState("");
 
   // Validation function
   const validateInputs = () => {
@@ -88,21 +92,29 @@ export default function Register() {
       return;
     }
 
+    // Set loading state to true
+    setLoading(true);
+
     try {
       const data = await register(email, password, number, role);
-      
-      if (data.statusCode === 200) {
-        alert("Registration successful!");
-        navigate("/");
-      } else if (data.message === "User already registered") {
-        alert("User already registered. Please log in.");
-        navigate("/");
-      } else {
-        alert("Registration failed. Please try again.");
-      }
+
+      // Simulate loading delay
+      setTimeout(() => {
+        setLoading(false); // Reset loading state after 1.5 seconds
+        if (data.statusCode === 200) {
+          alert("Registration successful!");
+          navigate("/");
+        } else if (data.message === "User already registered") {
+          alert("User already registered. Please log in.");
+          navigate("/");
+        } else {
+          alert("Registration failed. Please try again.");
+        }
+      }, 1500); // 1.5 seconds delay
     } catch (error) {
       console.error("Error:", error);
-      alert("Something went wrong. Please try again.");
+      setLoading(false); // Reset loading state in case of error
+      setError(error.message);
     }
   };
 
@@ -134,7 +146,9 @@ export default function Register() {
             onChange={(e) => setName(e.target.value)}
             required
           />
-          {nameError && <span style={{ color: "red", fontSize: "12px" }}>{nameError}</span>}
+          {nameError && (
+            <span style={{ color: "red", fontSize: "12px" }}>{nameError}</span>
+          )}
 
           <input
             type="text"
@@ -145,7 +159,11 @@ export default function Register() {
             onChange={(e) => setNumber(e.target.value)}
             required
           />
-          {numberError && <span style={{ color: "red", fontSize: "12px" }}>{numberError}</span>}
+          {numberError && (
+            <span style={{ color: "red", fontSize: "12px" }}>
+              {numberError}
+            </span>
+          )}
 
           <input
             type="text"
@@ -156,7 +174,9 @@ export default function Register() {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          {emailError && <span style={{ color: "red", fontSize: "12px" }}>{emailError}</span>}
+          {emailError && (
+            <span style={{ color: "red", fontSize: "12px" }}>{emailError}</span>
+          )}
 
           <input
             type="password"
@@ -167,15 +187,33 @@ export default function Register() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          {passwordError && <span style={{ color: "red", fontSize: "12px" }}>{passwordError}</span>}
-
-          <button type="submit" onClick={handleRegister}>
-            Register
+          {passwordError && (
+            <span style={{ color: "red", fontSize: "12px" }}>
+              {passwordError}
+            </span>
+          )}
+          {error && (
+            <span style={{ color: "red", fontSize: "12px" }}>{error}</span>
+          )}
+          <button type="button" onClick={handleRegister} disabled={loading}>
+            {loading ? (
+              <img
+                src={loadingImg}
+                alt="loadingPic"
+                style={{ width: "20px", height: "20px" }}
+              />
+            ) : (
+              "Register"
+            )}
           </button>
 
-          <div className="media_register">
-            <h4><br />Already Registered?</h4>
-            <a href="/"><b>Login Now</b></a>
+          <div className="mobile-register">
+            <h4>
+              Already Registered?
+              <Link to="/">
+                <p>Go to Login</p>
+              </Link>
+            </h4>
           </div>
         </div>
       </div>

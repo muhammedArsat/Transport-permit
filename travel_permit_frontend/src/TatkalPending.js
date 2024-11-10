@@ -1,56 +1,52 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "./components/AdminSidebar";
-import"./css/AdminApprove.css";
+import "./css/AdminApprove.css";
 
 export default function TatkalPending() {
-    const[pending,setpendinglist] = useState([]);
-    const token = localStorage.getItem("token");
+  const [pending, setpendinglist] = useState([]);
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     const fetchdata = async () => {
-        try{
-            const response = await fetch("http://localhost:8080/admin/takkal-list",{
-              headers:{
-                'Authorization':`Bearer ${token}`
-              }
-            });
-            const data = await response.json();
-            setpendinglist(data);
-        }catch(error)
-        {
-            console.error("Error to fetch Tatkkal form",error);
-        }
+      try {
+        const response = await fetch(
+          "http://localhost:8080/admin/takkal-list",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const data = await response.json();
+        setpendinglist(data);
+      } catch (error) {
+        console.error("Error to fetch Tatkkal form", error);
+      }
     };
     fetchdata();
   }, []);
 
-  const handleAccept = async (id) =>{
-    try{
-      await fetch(`http://localhost:8080/admin/takkal-list/${id}`,{
-        method:"PUT",
-        headers:{
-          "Content-Type":"application/json",
-          "Authorization":`Bearer ${token}`
-        }
-        
-      })
-     
-
-    }catch(error)
-    {
-      console.error("Error to approve the Tatkkal List")
+  const handleAccept = async (id) => {
+    try {
+      await fetch(`http://localhost:8080/admin/takkal-list/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    } catch (error) {
+      console.error("Error to approve the Tatkkal List");
     }
-   window.location.reload();
-  }
-
+    window.location.reload();
+  };
 
   return (
     <div>
-    
-  
-
       <div className="approval-wrap">
-        <div className="title"><h1>Tatkkal Pending Lists</h1></div>
+        <div className="title">
+          <h1>Tatkkal Pending Lists</h1>
+        </div>
         {pending.map((show, index) => (
           <div key={index} className="container-approval">
             <div className="small-container-approval">
@@ -92,7 +88,12 @@ export default function TatkalPending() {
 
             <div className="Btn-container-approval">
               <button className="btn-reject">Reject</button>
-              <button className="btn-approval" onClick={()=>{handleAccept(show.id)}}>
+              <button
+                className="btn-approval"
+                onClick={() => {
+                  handleAccept(show.id);
+                }}
+              >
                 Accept
               </button>
             </div>
@@ -100,5 +101,5 @@ export default function TatkalPending() {
         ))}
       </div>
     </div>
-  )
+  );
 }
