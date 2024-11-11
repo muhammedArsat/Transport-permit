@@ -73,11 +73,18 @@ function Form() {
   };
 
   const validateFromDate = (fromDate) => {
+    // Check if the field is empty
     if (!fromDate.trim()) {
       return '*From Date is required.';
     }
-    return '';
+    const today = new Date();
+    const todayDateString = today.toISOString().split("T")[0]; 
+    if (fromDate <= todayDateString) {
+      return '*From Date must be after today.';
+    }  
+    return ''; 
   };
+  
 
   const validateToDate = (fromDate, toDate) => {
     if (!toDate.trim()) {
@@ -186,6 +193,25 @@ function Form() {
       });
   };
 
+  const handleFromDateChange = (e) => {
+    const selectedDate = e.target.value;
+    setFromDate(e.target.value);
+    const fromDateError = validateFromDate(selectedDate);
+    if (fromDateError) {
+      setErrors({ ...errors, fromDate: fromDateError });
+    } else {
+      setErrors({ ...errors, fromDate: '' });
+    }
+    calculateToDate(no_of_days, e.target.value);
+  };
+
+  const calculateToDate = (days, startdate) => {
+    if(days && startdate){
+      const fdate = new Date(startdate);
+      fdate.setDate(fdate.getDate() + parseInt(days));
+      setToDate(fdate.toISOString().split("T")[0]);
+    }
+  }
   const handleVehicleModeChange = (e) => {
     const mode = e.target.value;
     setVehicleMode(mode);
@@ -354,7 +380,7 @@ function Form() {
                 id="fromDate"
                 value={fromDate}
                 onChange={(e) => {
-                  setFromDate(e.target.value);
+                  handleFromDateChange(e);
                 }}
               />
               {errors.fromDate && <span className="error">{errors.fromDate}</span>}
@@ -366,9 +392,7 @@ function Form() {
                 required
                 id="toDate"
                 value={toDate}
-                onChange={(e) => {
-                  setToDate(e.target.value);
-                }}
+                readOnly
               />
               {errors.toDate && <span className="error">{errors.toDate}</span>}
             </div>
