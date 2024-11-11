@@ -62,8 +62,8 @@ setLoading(false)
               <p><strong>To Date:</strong> {permit.toDate}</p>
               <p><strong>Vehicle Mode:</strong> {permit.vehicleMode}</p>
               <p><strong>Amount:</strong> {permit.amount}</p>
-              <p><strong>Status:</strong> {permit.status}</p>
-              <p style={{color:"red"}}><strong>Type:</strong> {permit.type}</p>
+              <p><strong>Status:</strong> {permit.status === "pending" ?<span style={{color:"orange"}}>Pending</span> : <span style={{color:"green"}}>Approved</span>}</p>
+              <p ><strong>Type:</strong> {permit.type}</p>
 
             </div>
           ))

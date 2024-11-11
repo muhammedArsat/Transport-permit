@@ -206,8 +206,9 @@ function Form() {
 
   return (
     <div>
- { loading ? <div className='loading'><img src={loadingImg} alt="loading pic" /></div>:
       <div style={{ display: 'flex' }}>
+ { loading ? <div className='loading'><img src={loadingImg} alt="loading pic" /></div>:
+    
       
 
         <div className="form">
@@ -360,8 +361,10 @@ function Form() {
           </form>
         </div>
 
-      </div>
+
 }
+</div>
+
     </div>
     );
 
