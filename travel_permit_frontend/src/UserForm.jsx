@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './css/UserForm.css';
 import loadingImg from "./images/loginload.svg"
+import Message from "./components/Message.jsx";
 
 function Form() {
   const token = localStorage.getItem("token");
@@ -17,6 +18,8 @@ function Form() {
   const [errors, setErrors] = useState({});
   const[type,setType] = useState("Normal")
   const[loading,setLoading] = useState(true);
+  const[message,setMessage] = useState(false);
+  const[isSuccess,setIsSuccess] = useState(true);
 
   const email =localStorage.getItem("Email");
 
@@ -93,6 +96,14 @@ function Form() {
     return '';
   };
 
+  useEffect(()=>{
+    setTimeout(()=>{
+      setMessage(false);
+    },3000)
+
+    return(()=>{clearTimeout()});
+  },[message])
+
   const handleClick = (e) => {
     e.preventDefault();
     
@@ -148,13 +159,15 @@ function Form() {
     })
       .then((response) => {
         if (!response.ok) {
+        
           throw new Error('Network response was not ok');
         }
         return response.text();
       })
       .then((message) => {
-        window.alert(message);
-        // Clear the form fields
+        setIsSuccess(true);
+        setMessage(true);
+
         setName('');
         setVehicleNo('');
         setLicenseNo('');
@@ -168,8 +181,8 @@ function Form() {
         setErrors({});
       })
       .catch((error) => {
-        console.error("There was a problem with the fetch operation:", error);
-        window.alert("Failed to add user details. Please try again.");
+        setMessage(true);
+        setIsSuccess(false);
       });
   };
 
@@ -206,11 +219,15 @@ function Form() {
 
   return (
     <div>
+       {message && 
+      <Message isSuccess={isSuccess} />
+    }
       <div style={{ display: 'flex' }}>
  { loading ? <div className='loading'><img src={loadingImg} alt="loading pic" /></div>:
     
+      <>
       
-
+   
         <div className="form">
           
           <h1 className="form-head">USER DETAILS</h1>
@@ -361,10 +378,11 @@ function Form() {
           </form>
         </div>
 
-
+</>
 }
-</div>
 
+
+</div>
     </div>
     );
 
