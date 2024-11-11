@@ -104,9 +104,7 @@ const AdminSidebar = () => {
                   Dashboard <MdSpaceDashboard className="nav-icons" />
                 </li>
               </a>
-              <a href="user-profile">
-                <li>Profile</li>
-              </a>
+             
             </>
           )}
           {role === "ADMIN" && (
