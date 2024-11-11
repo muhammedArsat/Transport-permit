@@ -280,333 +280,146 @@ function Form() {
       setLoading(false);
     }, 1500);
   }, [loading]);
-
   return (
     <div>
       {message && <Message isSuccess={isSuccess} />}
       <div style={{ display: "flex" }}>
         {loading ? (
           <div className="loading">
-            <img src={loadingImg} alt="loading pic" />
+            <img src={loadingImg} alt="loading" />
           </div>
         ) : (
-          <>
-            <div className="form">
-              <h1 className="form-head">USER DETAILS</h1>
-              <form className="form-body">
-                <div className="form-group">
-                  <label htmlFor="email">EMAIL</label>
-                  <input type="text" id="email" value={email} readOnly />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="name">NAME</label>
-                  <input
-                    type="text"
-                    required
-                    id="name"
-                    value={name}
-                    onChange={(e) => {
-                      setName(e.target.value);
-                    }}
-                  />
-                  {errors.name && <span className="error">{errors.name}</span>}
-                </div>
-                <div className="form-group">
-                  <label htmlFor="vehicle">VEHICLE NO</label>
-                  <input
-                    type="text"
-                    required
-                    id="vehicle"
-                    value={vehicleNo}
-                    onChange={(e) => {
-                      setVehicleNo(e.target.value);
-                    }}
-                  />
-                  {errors.vehicleNo && (
-                    <span className="error">{errors.vehicleNo}</span>
-                  )}
-                </div>
-                <div className="form-group">
-                  <label htmlFor="license">LICENSE NO</label>
-                  <input
-                    type="text"
-                    required
-                    id="license"
-                    value={licenseNo}
-                    onChange={(e) => {
-                      setLicenseNo(e.target.value);
-                    }}
-                  />
-                  {errors.licenseNo && (
-                    <span className="error">{errors.licenseNo}</span>
-                  )}
-                </div>
-                <div className="form-group">
-                  <label htmlFor="vehicle_mode">VEHICLE MODE</label>
-                  <select
-                    id="vehicle_mode"
-                    required
-                    value={vehicleMode}
-                    onChange={handleVehicleModeChange}
-                  >
-                    <option value="">Select a vehicle mode</option>
-                    <option value="GV">Goods Vehicles (GV)</option>
-                    <option value="PV">Passenger Vehicles (PV)</option>
-                    <option value="CCV">
-                      Contract Carriage Vehicles (CCV)
-                    </option>
-                    <option value="PSV">Public Service Vehicles (PSV)</option>
-                    <option value="TTV">Trailers and Tankers (TTV)</option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="amount">AMOUNT</label>
-                  <input type="text" id="amount" value={amount} readOnly />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="days">NO. OF DAYS</label>
-                  <input
-                    type="text"
-                    required
-                    id="days"
-                    value={no_of_days}
-                    onChange={(e) => {
-                      setNo_Of_Days(e.target.value);
-                    }}
-                  />
-                  {errors.no_of_days && (
-                    <span className="error">{errors.no_of_days}</span>
-                  )}
-                </div>
-                <div className="form-group">
-                  <label htmlFor="fromPlace">FROM PLACE</label>
-                  <select
-                    id="fromPlace"
-                    required
-                    value={fromPlace}
-                    onChange={(e) => {
-                      setFromPlace(e.target.value);
-                    }}
-                  >
-                    <option value="">Select a state/UT</option>
-                    {statesAndUTs.map((state, index) => (
-                      <option key={index} value={state}>
-                        {state}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.fromPlace && (
-                    <span className="error">{errors.fromPlace}</span>
-                  )}
-                </div>
-                <div className="form-group">
-                  <label htmlFor="toPlace">TO PLACE</label>
-                  <select
-                    id="toPlace"
-                    required
-                    value={toPlace}
-                    onChange={(e) => {
-                      setToPlace(e.target.value);
-                    }}
-                  >
-                    <option value="">Select a state/UT</option>
-                    {statesAndUTs.map((state, index) => (
-                      <option key={index} value={state}>
-                        {state}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.toPlace && (
-                    <span className="error">{errors.toPlace}</span>
-                  )}
-                </div>
-                <div className="form-group">
-                  <label htmlFor="fromDate">FROM DATE</label>
-                  <input
-                    type="date"
-                    required
-                    id="fromDate"
-                    value={fromDate}
-                    onChange={(e) => {
-                      setFromDate(e.target.value);
-                    }}
-                  />
-                  {errors.fromDate && (
-                    <span className="error">{errors.fromDate}</span>
-                  )}
-                </div>
-                <div className="form-group">
-                  <label htmlFor="toDate">TO DATE</label>
-                  <input
-                    type="date"
-                    required
-                    id="toDate"
-                    value={toDate}
-                    onChange={(e) => {
-                      setToDate(e.target.value);
-                    }}
-                  />
-                  {errors.toDate && (
-                    <span className="error">{errors.toDate}</span>
-                  )}
-                </div>
-                <div className="button-group">
-                  <button onClick={handleClick}>NEXT</button>
-                </div>
-              </form>
-            </div>
-<<<<<<< HEAD
-            <div className="form-group">
-              <label htmlFor="name">NAME</label>
-              <input
-                type="text"
-                required
-                id="name"
-                value={name}
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-              />
-              {errors.name && <span className="error">{errors.name}</span>}
-            </div>
-            <div className="form-group">
-              <label htmlFor="vehicle">VEHICLE NO</label>
-              <input
-                type="text"
-                required
-                id="vehicle"
-                value={vehicleNo}
-                onChange={(e) => {
-                  setVehicleNo(e.target.value);
-                }}
-              />
-              {errors.vehicleNo && <span className="error">{errors.vehicleNo}</span>}
-            </div>
-            <div className="form-group">
-              <label htmlFor="license">LICENSE NO</label>
-              <input
-                type="text"
-                required
-                id="license"
-                value={licenseNo}
-                onChange={(e) => {
-                  setLicenseNo(e.target.value);
-                }}
-              />
-              {errors.licenseNo && <span className="error">{errors.licenseNo}</span>}
-            </div>
-            <div className="form-group">
-              <label htmlFor="vehicle_mode">VEHICLE MODE</label>
-              <select
-                id="vehicle_mode"
-                required
-                value={vehicleMode}
-                onChange={handleVehicleModeChange}
-              >
-                <option value="">Select a vehicle mode</option>
-                <option value="GV">Goods Vehicles (GV)</option>
-                <option value="PV">Passenger Vehicles (PV)</option>
-                <option value="CCV">Contract Carriage Vehicles (CCV)</option>
-                <option value="PSV">Public Service Vehicles (PSV)</option>
-                <option value="TTV">Trailers and Tankers (TTV)</option>
-              </select>
-            </div>
-            <div className="form-group">
-              <label htmlFor="amount">AMOUNT</label>
-              <input type="text" id="amount" value={amount} readOnly />
-            </div>
-            <div className="form-group">
-              <label htmlFor="days">NO. OF DAYS</label>
-              <input
-                type="text"
-                required
-                id="days"
-                value={no_of_days}
-                onChange={(e) => {
-                  setNo_Of_Days(e.target.value);
-                }}
-              />
-              {errors.no_of_days && <span className="error">{errors.no_of_days}</span>}
-            </div>
-            <div className="form-group">
-              <label htmlFor="fromPlace">FROM PLACE</label>
-              <select
-                id="fromPlace"
-                required
-                value={fromPlace}
-                onChange={(e) => {
-                  setFromPlace(e.target.value);
-                }}
-              >
-                <option value="">Select a state/UT</option>
-                {statesAndUTs.map((state, index) => (
-                  <option key={index} value={state}>
-                    {state}
-                  </option>
-                ))}
-              </select>
-              {errors.fromPlace && <span className="error">{errors.fromPlace}</span>}
-            </div>
-            <div className="form-group">
-              <label htmlFor="toPlace">TO PLACE</label>
-              <select
-                id="toPlace"
-                required
-                value={toPlace}
-                onChange={(e) => {
-                  setToPlace(e.target.value);
-                }}
-              >
-                <option value="">Select a state/UT</option>
-                {statesAndUTs.map((state, index) => (
-                  <option key={index} value={state}>
-                    {state}
-                  </option>
-                ))}
-              </select>
-              {errors.toPlace && <span className="error">{errors.toPlace}</span>}
-            </div>
-            <div className="form-group">
-              <label htmlFor="fromDate">FROM DATE</label>
-              <input
-                type="date"
-                required
-                id="fromDate"
-                value={fromDate}
-                onChange={(e) => {
-                  handleFromDateChange(e);
-                }}
-              />
-              {errors.fromDate && <span className="error">{errors.fromDate}</span>}
-            </div>
-            <div className="form-group">
-              <label htmlFor="toDate">TO DATE</label>
-              <input
-                type="date"
-                required
-                id="toDate"
-                value={toDate}
-                readOnly
-              />
-              {errors.toDate && <span className="error">{errors.toDate}</span>}
-            </div>
-            <div className="button-group">
-              <button onClick={handleClick}>NEXT</button>
-            </div>
-          </form>
-        </div>
-
-</>
-}
-
-
-</div>
-=======
-          </>
+          <div className="form">
+            <h1 className="form-head">USER DETAILS</h1>
+            <form className="form-body">
+              <div className="form-group">
+                <label htmlFor="email">EMAIL</label>
+                <input type="text" id="email" value={email} readOnly />
+              </div>
+              <div className="form-group">
+                <label htmlFor="name">NAME</label>
+                <input
+                  type="text"
+                  required
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                {errors.name && <span className="error">{errors.name}</span>}
+              </div>
+              <div className="form-group">
+                <label htmlFor="vehicle">VEHICLE NO</label>
+                <input
+                  type="text"
+                  required
+                  id="vehicle"
+                  value={vehicleNo}
+                  onChange={(e) => setVehicleNo(e.target.value)}
+                />
+                {errors.vehicleNo && <span className="error">{errors.vehicleNo}</span>}
+              </div>
+              <div className="form-group">
+                <label htmlFor="license">LICENSE NO</label>
+                <input
+                  type="text"
+                  required
+                  id="license"
+                  value={licenseNo}
+                  onChange={(e) => setLicenseNo(e.target.value)}
+                />
+                {errors.licenseNo && <span className="error">{errors.licenseNo}</span>}
+              </div>
+              <div className="form-group">
+                <label htmlFor="vehicle_mode">VEHICLE MODE</label>
+                <select
+                  id="vehicle_mode"
+                  required
+                  value={vehicleMode}
+                  onChange={handleVehicleModeChange}
+                >
+                  <option value="">Select a vehicle mode</option>
+                  <option value="GV">Goods Vehicles (GV)</option>
+                  <option value="PV">Passenger Vehicles (PV)</option>
+                  <option value="CCV">Contract Carriage Vehicles (CCV)</option>
+                  <option value="PSV">Public Service Vehicles (PSV)</option>
+                  <option value="TTV">Trailers and Tankers (TTV)</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label htmlFor="amount">AMOUNT</label>
+                <input type="text" id="amount" value={amount} readOnly />
+              </div>
+              <div className="form-group">
+                <label htmlFor="days">NO. OF DAYS</label>
+                <input
+                  type="text"
+                  required
+                  id="days"
+                  value={no_of_days}
+                  onChange={(e) => setNo_Of_Days(e.target.value)}
+                />
+                {errors.no_of_days && <span className="error">{errors.no_of_days}</span>}
+              </div>
+              <div className="form-group">
+                <label htmlFor="fromPlace">FROM PLACE</label>
+                <select
+                  id="fromPlace"
+                  required
+                  value={fromPlace}
+                  onChange={(e) => setFromPlace(e.target.value)}
+                >
+                  <option value="">Select a state/UT</option>
+                  {statesAndUTs.map((state, index) => (
+                    <option key={index} value={state}>{state}</option>
+                  ))}
+                </select>
+                {errors.fromPlace && <span className="error">{errors.fromPlace}</span>}
+              </div>
+              <div className="form-group">
+                <label htmlFor="toPlace">TO PLACE</label>
+                <select
+                  id="toPlace"
+                  required
+                  value={toPlace}
+                  onChange={(e) => setToPlace(e.target.value)}
+                >
+                  <option value="">Select a state/UT</option>
+                  {statesAndUTs.map((state, index) => (
+                    <option key={index} value={state}>{state}</option>
+                  ))}
+                </select>
+                {errors.toPlace && <span className="error">{errors.toPlace}</span>}
+              </div>
+              <div className="form-group">
+                <label htmlFor="fromDate">FROM DATE</label>
+                <input
+                  type="date"
+                  required
+                  id="fromDate"
+                  value={fromDate}
+                  onChange={handleFromDateChange}
+                />
+                {errors.fromDate && <span className="error">{errors.fromDate}</span>}
+              </div>
+              <div className="form-group">
+                <label htmlFor="toDate">TO DATE</label>
+                <input
+                  type="date"
+                  required
+                  id="toDate"
+                  value={toDate}
+                  readOnly
+                />
+                {errors.toDate && <span className="error">{errors.toDate}</span>}
+              </div>
+              <div className="button-group">
+                <button onClick={handleClick}>NEXT</button>
+              </div>
+            </form>
+          </div>
         )}
       </div>
->>>>>>> ff8b4f503896e07ee87cfa74cf7c06d0721c594a
     </div>
   );
 }
-export default Form;
+export default Form;  
