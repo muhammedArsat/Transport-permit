@@ -32,118 +32,97 @@ export default function UserHome() {
     fetchData();
   }, [token]);
 
-
-
-  useEffect(()=>{
-    const fetchData = async () =>{
-      try{
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
         const response = await fetch(
           "http://localhost:8080/user/kerala-count",
           {
-            headers:{
-              Authorization:`Bearer ${token}`,
-            }
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
         );
-        if(!response.ok)
-        {
+        if (!response.ok) {
           throw new Error(`HTTP ERROR : ${response.status}`);
         }
 
         const result = await response.json();
         setKl(result);
-      }catch(error){
-          
-      }
-    }
+      } catch (error) {}
+    };
 
     fetchData();
-  },[token])
+  }, [token]);
 
-
-  useEffect(()=>{
-    const fetchData = async () =>{
-      try{
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
         const response = await fetch(
           "http://localhost:8080/user/karnataka-count",
           {
-            headers:{
-              Authorization:`Bearer ${token}`,
-            }
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
         );
-        if(!response.ok)
-        {
+        if (!response.ok) {
           throw new Error(`HTTP ERROR : ${response.status}`);
         }
 
         const result = await response.json();
         setKr(result);
-      }catch(error){
-          
-      }
-    }
+      } catch (error) {}
+    };
 
     fetchData();
-  },[token])
+  }, [token]);
 
-
-
-  useEffect(()=>{
-    const fetchData = async () =>{
-      try{
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
         const response = await fetch(
           "http://localhost:8080/user/telangana-count",
           {
-            headers:{
-              Authorization:`Bearer ${token}`,
-            }
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
         );
-        if(!response.ok)
-        {
+        if (!response.ok) {
           throw new Error(`HTTP ERROR : ${response.status}`);
         }
 
         const result = await response.json();
         setTel(result);
-      }catch(error){
-          
-      }
-    }
+      } catch (error) {}
+    };
 
     fetchData();
-  },[token])
+  }, [token]);
 
-
-
-  useEffect(()=>{
-    const fetchData = async () =>{
-      try{
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
         const response = await fetch(
           "http://localhost:8080/user/maharashtra-count",
           {
-            headers:{
-              Authorization:`Bearer ${token}`,
-            }
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
         );
-        if(!response.ok)
-        {
+        if (!response.ok) {
           throw new Error(`HTTP ERROR : ${response.status}`);
         }
 
         const result = await response.json();
         setMh(result);
-      }catch(error){
-          
-      }
-    }
+      } catch (error) {}
+    };
 
     fetchData();
-  },[token])
-
-
+  }, [token]);
 
   return (
     <div className="user-home-container">

@@ -4,6 +4,8 @@ import loadingImg from "./images/loginload.svg";
 import Message from "./components/Message.jsx";
 
 function Form() {
+
+  
   const token = localStorage.getItem("token");
   const [name, setName] = useState("");
   const [vehicleNo, setVehicleNo] = useState("");
@@ -107,13 +109,12 @@ function Form() {
       return "*From Date is required.";
     }
     const today = new Date();
-    const todayDateString = today.toISOString().split("T")[0]; 
+    const todayDateString = today.toISOString().split("T")[0];
     if (fromDate <= todayDateString) {
-      return '*From Date must be after today.';
-    }  
-    return ''; 
+      return "*From Date must be after today.";
+    }
+    return "";
   };
-  
 
   const validateToDate = (fromDate, toDate) => {
     if (!toDate.trim()) {
@@ -144,7 +145,8 @@ function Form() {
 
   const handleClick = (e) => {
     e.preventDefault();
-
+  
+    // Run all validations
     const nameError = validateName(name);
     const vehicleError = validateVehicleNo(vehicleNo);
     const licenseError = validateLicenseNo(licenseNo);
@@ -153,8 +155,8 @@ function Form() {
     const toDateError = validateToDate(fromDate, toDate);
     const fromPlaceError = validatePlace(fromPlace);
     const toPlaceError = validatePlace(toPlace);
-
-    // If there are errors, set them in state and prevent form submission
+  
+    // If there are validation errors, show them and prevent further execution
     if (
       nameError ||
       vehicleError ||
@@ -177,59 +179,92 @@ function Form() {
       });
       return;
     }
-
-    // If no errors, proceed with form submission
-    const detail = {
-      name,
-      vehicleNo,
-      licenseNo,
-      no_of_days,
-      fromPlace,
-      toPlace,
-      fromDate,
-      toDate,
-      vehicleMode,
-      amount,
-      email,
-      type,
-    };
-
-    fetch("http://localhost:8080/user/normal-application", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+  
+    // All validations passed; proceed with Razorpay
+    const options = {
+      key: "rzp_test_YsjjIcIZQU3Q4k",
+      amount: amount * 100, // Razorpay expects amount in paise
+      currency: "INR",
+      name: "TRANSPORT MINISTRY",
+      description: "For Testing Purpose",
+      handler: function (response) {
+        // Payment success callback
+        alert(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
+  
+        // Post data to the database
+        const detail = {
+          name,
+          vehicleNo,
+          licenseNo,
+          no_of_days,
+          fromPlace,
+          toPlace,
+          fromDate,
+          toDate,
+          vehicleMode,
+          amount,
+          email,
+          type,
+        };
+  
+        fetch("http://localhost:8080/user/normal-application", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(detail),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Failed to submit data to the database");
+            }
+            return response.text();
+          })
+          .then((message) => {
+            window.location.reload();
+            setIsSuccess(true);
+            setMessage(true);
+  
+            // Reset form fields
+            setName("");
+            setVehicleNo("");
+            setLicenseNo("");
+            setNo_Of_Days("");
+            setFromPlace("");
+            setToPlace("");
+            setFromDate("");
+            setToDate("");
+            setVehicleMode("");
+            setAmount("");
+            setErrors({});
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("Payment was successful, but we could not save the details. Please contact support.");
+            setMessage(true);
+            setIsSuccess(false);
+          });
       },
-      body: JSON.stringify(detail),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.text();
-      })
-      .then((message) => {
-        window.location.reload();
-        setIsSuccess(true);
-        setMessage(true);
-
-        setName("");
-        setVehicleNo("");
-        setLicenseNo("");
-        setNo_Of_Days("");
-        setFromPlace("");
-        setToPlace("");
-        setFromDate("");
-        setToDate("");
-        setVehicleMode("");
-        setAmount("");
-        setErrors({});
-      })
-      .catch((error) => {
-        setMessage(true);
-        setIsSuccess(false);
-      });
+      prefill: {
+        name,
+        email,
+        contact: "1234567890", // You may want to make this dynamic
+      },
+      notes: {
+        address: "Razorpay Corporate Office",
+      },
+      theme: {
+        color: "#3399cc",
+      },
+    };
+  
+    const pay = new window.Razorpay(options);
+  
+    // Open Razorpay payment gateway
+    pay.open();
   };
+  
 
   const handleFromDateChange = (e) => {
     const selectedDate = e.target.value;
@@ -238,18 +273,18 @@ function Form() {
     if (fromDateError) {
       setErrors({ ...errors, fromDate: fromDateError });
     } else {
-      setErrors({ ...errors, fromDate: '' });
+      setErrors({ ...errors, fromDate: "" });
     }
     calculateToDate(no_of_days, e.target.value);
   };
 
   const calculateToDate = (days, startdate) => {
-    if(days && startdate){
+    if (days && startdate) {
       const fdate = new Date(startdate);
       fdate.setDate(fdate.getDate() + parseInt(days));
       setToDate(fdate.toISOString().split("T")[0]);
     }
-  }
+  };
   const handleVehicleModeChange = (e) => {
     const mode = e.target.value;
     setVehicleMode(mode);
@@ -316,7 +351,9 @@ function Form() {
                   value={vehicleNo}
                   onChange={(e) => setVehicleNo(e.target.value)}
                 />
-                {errors.vehicleNo && <span className="error">{errors.vehicleNo}</span>}
+                {errors.vehicleNo && (
+                  <span className="error">{errors.vehicleNo}</span>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="license">LICENSE NO</label>
@@ -327,7 +364,9 @@ function Form() {
                   value={licenseNo}
                   onChange={(e) => setLicenseNo(e.target.value)}
                 />
-                {errors.licenseNo && <span className="error">{errors.licenseNo}</span>}
+                {errors.licenseNo && (
+                  <span className="error">{errors.licenseNo}</span>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="vehicle_mode">VEHICLE MODE</label>
@@ -358,7 +397,9 @@ function Form() {
                   value={no_of_days}
                   onChange={(e) => setNo_Of_Days(e.target.value)}
                 />
-                {errors.no_of_days && <span className="error">{errors.no_of_days}</span>}
+                {errors.no_of_days && (
+                  <span className="error">{errors.no_of_days}</span>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="fromPlace">FROM PLACE</label>
@@ -370,10 +411,14 @@ function Form() {
                 >
                   <option value="">Select a state/UT</option>
                   {statesAndUTs.map((state, index) => (
-                    <option key={index} value={state}>{state}</option>
+                    <option key={index} value={state}>
+                      {state}
+                    </option>
                   ))}
                 </select>
-                {errors.fromPlace && <span className="error">{errors.fromPlace}</span>}
+                {errors.fromPlace && (
+                  <span className="error">{errors.fromPlace}</span>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="toPlace">TO PLACE</label>
@@ -385,10 +430,14 @@ function Form() {
                 >
                   <option value="">Select a state/UT</option>
                   {statesAndUTs.map((state, index) => (
-                    <option key={index} value={state}>{state}</option>
+                    <option key={index} value={state}>
+                      {state}
+                    </option>
                   ))}
                 </select>
-                {errors.toPlace && <span className="error">{errors.toPlace}</span>}
+                {errors.toPlace && (
+                  <span className="error">{errors.toPlace}</span>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="fromDate">FROM DATE</label>
@@ -399,7 +448,9 @@ function Form() {
                   value={fromDate}
                   onChange={handleFromDateChange}
                 />
-                {errors.fromDate && <span className="error">{errors.fromDate}</span>}
+                {errors.fromDate && (
+                  <span className="error">{errors.fromDate}</span>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="toDate">TO DATE</label>
@@ -410,7 +461,9 @@ function Form() {
                   value={toDate}
                   readOnly
                 />
-                {errors.toDate && <span className="error">{errors.toDate}</span>}
+                {errors.toDate && (
+                  <span className="error">{errors.toDate}</span>
+                )}
               </div>
               <div className="button-group">
                 <button onClick={handleClick}>NEXT</button>
@@ -422,4 +475,4 @@ function Form() {
     </div>
   );
 }
-export default Form;  
+export default Form;
