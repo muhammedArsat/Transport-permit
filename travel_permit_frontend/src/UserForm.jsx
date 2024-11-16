@@ -260,8 +260,7 @@ function Form() {
     };
   
     const pay = new window.Razorpay(options);
-  
-    // Open Razorpay payment gateway
+ 
     pay.open();
   };
   
