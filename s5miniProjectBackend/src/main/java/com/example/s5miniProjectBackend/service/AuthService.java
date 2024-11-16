@@ -62,16 +62,32 @@ public class AuthService {
     }
 
 
-    public ReqRes signIn(ReqRes signInRequest)
-    {
+
+    public ReqRes signIn(ReqRes signInRequest) {
         ReqRes response = new ReqRes();
 
-        try{
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signInRequest.getEmail(), signInRequest.getPassword()));
-            var user = ourUserRepo.findByEmail(signInRequest.getEmail()).orElseThrow();
-            var jwt = jwtUtils.generateToken(user);
+        try {
+            // Retrieve user from the repository
+            OurUsers user = ourUserRepo.findByEmail(signInRequest.getEmail())
+                    .orElseThrow(() -> new RuntimeException("User not found"));
 
-            var refreshToken = jwtUtils.generateRefreshToken(new HashMap<>(),user);
+            // Check if password matches
+            if (!passwordEncoder.matches(signInRequest.getPassword(), user.getPassword())) {
+                response.setStatusCode(401);
+                response.setMessage("Invalid credentials: password does not match");
+                return response;
+            }
+
+            // Attempt to authenticate
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(signInRequest.getEmail(), signInRequest.getPassword())
+            );
+
+            // Generate JWT and refresh tokens
+            var jwt = jwtUtils.generateToken(user);
+            var refreshToken = jwtUtils.generateRefreshToken(new HashMap<>(), user);
+
+            // Populate response
             response.setStatusCode(200);
             response.setToken(jwt);
             response.setRefreshToken(refreshToken);
@@ -80,10 +96,12 @@ public class AuthService {
             response.setEmail(user.getEmail());
             response.setMessage("Successfully Signed In");
 
-        }catch (Exception e){
-            response.setStatusCode(500);
-            response.setError(e.getMessage());
+        } catch (Exception e) {
+            response.setStatusCode(401);
+            response.setError("Authentication failed: " + e.getMessage());
+            e.printStackTrace(); // Log for debugging
         }
+
         return response;
     }
 
@@ -103,6 +121,31 @@ public class AuthService {
         }
         response.setStatusCode(500);
         return response;
+    }
+
+    public ReqRes updatedPassword(String email, String newPassword) {
+        ReqRes reqRes = new ReqRes();
+
+        try {
+            Optional<OurUsers> existingUser = ourUserRepo.findByEmail(email);
+
+            if (existingUser.isPresent()) {
+                OurUsers user = existingUser.get();
+                user.setPassword(passwordEncoder.encode(newPassword));
+                // You can update other fields if necessary
+                ourUserRepo.save(user);
+                reqRes.setMessage("Password updated successfully");
+                reqRes.setStatusCode(200);
+            } else {
+                reqRes.setMessage("User not found");
+                reqRes.setStatusCode(404);
+            }
+        } catch (Exception e) {
+            reqRes.setMessage("Error: " + e.getMessage());
+            reqRes.setStatusCode(500);
+        }
+
+        return reqRes;
     }
 
 }

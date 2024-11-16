@@ -85,6 +85,35 @@ public class UserController {
         return ResponseEntity.ok(count);
     }
 
+    @GetMapping("/tamil-nadu-count")
+    public ResponseEntity<Long> getTamilNaduCount(){
+        long count = service.countFromPlace("Tamil Nadu");
+        return ResponseEntity.ok(count);
+    }
+
+    @GetMapping("/kerala-count")
+    public  ResponseEntity<Long> getKerala(){
+        long count = service.countFromPlace("Kerala");
+        return  ResponseEntity.ok(count);
+    }
+
+    @GetMapping("/karnataka-count")
+    public ResponseEntity<Long> getKarnataka(){
+        long count = service.countFromPlace("Karnataka");
+        return ResponseEntity.ok(count);
+    }
+
+    @GetMapping("/telungana-count")
+    public ResponseEntity<Long> getTelangana(){
+        long count = service.countFromPlace("Telangana");
+        return ResponseEntity.ok(count);
+    }
+
+    @GetMapping("/Maharashtra-count")
+    public  ResponseEntity<Long> getMaharashtra(){
+        long count  = service.countFromPlace("Maharashtra");
+        return  ResponseEntity.ok(count);
+    }
 
 
 

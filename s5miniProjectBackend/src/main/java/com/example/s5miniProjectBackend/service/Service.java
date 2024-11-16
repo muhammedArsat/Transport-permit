@@ -41,4 +41,9 @@ public interface Service {
     List<UserForm> getAppliedPermitsByEmail(String email);
 
     long findTotApplicationByEmail(String email);
+
+
+
+    Long countFromPlace(String state);
+
 }

@@ -125,5 +125,8 @@ public class ServiceImpl implements Service{
         return userFormRepository.findTotApplicationByEmail(email);
     }
 
+    public Long countFromPlace(String fromPlace) {
+        return userFormRepository.countByFromPlace(fromPlace);
+    }
 
 }
