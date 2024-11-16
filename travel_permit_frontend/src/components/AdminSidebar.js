@@ -9,7 +9,6 @@ import { TiTick } from "react-icons/ti";
 import { MdOutlineDarkMode } from "react-icons/md";
 import { MdDarkMode } from "react-icons/md";
 
-
 import "../css/Sb.css";
 
 const AdminSidebar = () => {
@@ -69,71 +68,72 @@ const AdminSidebar = () => {
       <div className={`sb ${isSidebarOpen ? "open" : ""}`}>
         <h3>Transport Permit</h3>
         <ul>
-          {/* {
-        role === "USER" &&(
-        
-        )
-     
-       }  */}
           {role === "USER" && (
             <>
               <a href="/user-home">
                 <li>
-                  Home <FaHome className="nav-icons" />
+                  <p>Home</p>
+                  <FaHome className="nav-icons" />
                 </li>
               </a>
               <a href="/user-form">
                 <li>
-                  Normal Form <FaWpforms className="nav-icons" />
+                  <p>Normal Form</p> <FaWpforms className="nav-icons" />
                 </li>
               </a>
               {isTakkal ? (
                 <Link to={`/takal-form`}>
                   <li>
-                    Takkaal Form <FaClipboardList className="nav-icons" />
+                    <p>Takkaal Form</p>{" "}
+                    <FaClipboardList className="nav-icons" />
                   </li>
                 </Link>
               ) : (
                 <li style={{ color: "gray" }}>
-                  Takkal Form (only open between 11 am to 12 pm)
+                  <p>Takkal Form (only open between 11 am to 12 pm)</p>
+
                   <FaClipboardList className="nav-icons" />
                 </li>
               )}
               <a href="/user-dashboard">
                 <li>
-                  Dashboard <MdSpaceDashboard className="nav-icons" />
+                  <p>Dashboard</p>
+                  <MdSpaceDashboard className="nav-icons" />
                 </li>
               </a>
-             
             </>
           )}
           {role === "ADMIN" && (
             <>
               <a href="/admin-landingpage">
                 <li>
-                  Home <FaHome className="nav-icons" />
+                  <p>Home</p>
+                  <FaHome className="nav-icons" />
                 </li>
               </a>
 
               <a href="/takkal-pending">
                 <li>
-                  Tatkkal List <FaClipboardList className="nav-icons" />
+                  <p>Tatkkal List</p>
+                  <FaClipboardList className="nav-icons" />
                 </li>
               </a>
               <a href="/admin-approve">
                 <li>
-                  Pending Lists
+                  <p>Pending Lists</p>
+
                   <FaWpforms className="nav-icons" />
                 </li>
               </a>
               <a href="/approved-list">
                 <li>
-                  Approved List <TiTick className="nav-icons" />
+                  <p> Approved List</p>
+                  <TiTick className="nav-icons" />
                 </li>
               </a>
               <a href="/passed-list">
                 <li>
-                  Passed List
+                  <p>Passed List</p>
                   <TiTick className="nav-icons" />
                 </li>
               </a>
@@ -144,20 +144,28 @@ const AdminSidebar = () => {
             <>
               <a href="/check-home">
                 <li>
-                  Home <FaHome className="nav-icons" />
+                  <p>Home</p>
+                  <FaHome className="nav-icons" />
                 </li>
               </a>
               <a href="/check-verify">
                 <li>
-                  Pending Lists
+                  <p> Pending Lists</p>
                   <FaWpforms className="nav-icons" />
                 </li>
               </a>
             </>
           )}
-          <li onClick={handleTheme} > {isDarkTheme ? "Light Mode" : "Dark Mode"}{isDarkTheme ? <MdDarkMode/> : <MdOutlineDarkMode/>} </li>
+          <li onClick={handleTheme}>
+            {" "}
+            {isDarkTheme ? "Light Mode" : "Dark Mode"}
+            {isDarkTheme ? <MdDarkMode /> : <MdOutlineDarkMode />}{" "}
+          </li>
           <li onClick={handleLogout}>
-            Logout <SlLogout className="nav-icons" />
+            <p>
+            Logout
+            </p>
+            <SlLogout className="nav-icons" />
           </li>
         </ul>
       </div>

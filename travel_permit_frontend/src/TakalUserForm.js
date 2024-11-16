@@ -165,7 +165,7 @@ const TakalUserForm = () => {
       description: "For Testing Purpose",
       handler: function (response) {
         // Payment success callback
-        alert(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
+      
   
     const detail = {
       name,

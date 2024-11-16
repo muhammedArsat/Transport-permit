@@ -189,7 +189,7 @@ function Form() {
       description: "For Testing Purpose",
       handler: function (response) {
         // Payment success callback
-        alert(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
+       
   
         // Post data to the database
         const detail = {
