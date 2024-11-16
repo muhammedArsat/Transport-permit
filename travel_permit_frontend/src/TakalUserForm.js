@@ -157,6 +157,16 @@ const TakalUserForm = () => {
       return "";
     }
 
+    const options = {
+      key: "rzp_test_YsjjIcIZQU3Q4k",
+      amount: amount * 100, // Razorpay expects amount in paise
+      currency: "INR",
+      name: "TRANSPORT MINISTRY",
+      description: "For Testing Purpose",
+      handler: function (response) {
+        // Payment success callback
+        alert(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
+  
     const detail = {
       name,
       vehicleNo,
@@ -218,7 +228,24 @@ const TakalUserForm = () => {
         setIsSuccess(false)
 
       });
-  };
+  },
+  prefill: {
+    name,
+    email,
+    contact: "1234567890", // You may want to make this dynamic
+  },
+  notes: {
+    address: "Razorpay Corporate Office",
+  },
+  theme: {
+    color: "#3399cc",
+  },
+};
+
+const pay = new window.Razorpay(options);
+
+pay.open();
+};
 
   const handleVehicleModeChange = (e) => {
     const mode = e.target.value;
