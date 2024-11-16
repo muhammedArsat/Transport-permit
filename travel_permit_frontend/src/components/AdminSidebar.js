@@ -8,6 +8,7 @@ import { FaClipboardList } from "react-icons/fa";
 import { TiTick } from "react-icons/ti";
 import { MdOutlineDarkMode } from "react-icons/md";
 import { MdDarkMode } from "react-icons/md";
+import { CgProfile } from "react-icons/cg";
 
 import "../css/Sb.css";
 
@@ -137,6 +138,13 @@ const AdminSidebar = () => {
                   <TiTick className="nav-icons" />
                 </li>
               </a>
+
+              <a href="/add-admin">
+                <li>
+                  <p>Add Admin</p>
+                  <CgProfile />
+                </li>
+              </a>
             </>
           )}
 
@@ -154,6 +162,12 @@ const AdminSidebar = () => {
                   <FaWpforms className="nav-icons" />
                 </li>
               </a>
+              <a href="/add-verifier">
+                <li>
+                  <p> Add Verifier</p>
+                  <CgProfile className="nav-icons" />
+                </li>
+              </a>
             </>
           )}
           <li onClick={handleTheme}>
@@ -162,9 +176,7 @@ const AdminSidebar = () => {
             {isDarkTheme ? <MdDarkMode /> : <MdOutlineDarkMode />}{" "}
           </li>
           <li onClick={handleLogout}>
-            <p>
-            Logout
-            </p>
+            <p>Logout</p>
             <SlLogout className="nav-icons" />
           </li>
         </ul>

@@ -22,7 +22,8 @@ import VerifierLayout from './VerifierLayout';
 import UserService from './UserService';
 import AdminSidebar from './components/AdminSidebar';
 import NotFound from './NotFound';
-import UserProfile from './UserProfile';
+import AddVerifier from './Verifier';
+import AddAdmin from './AddAdmin';
 
 function App() {
     const [loading, setLoading] = useState(true);
@@ -84,12 +85,15 @@ function App() {
                         <Route path="/takkal-pending" element={<ProtectedRoute role="ADMIN"><TatkalPending /></ProtectedRoute>} />
                         <Route path="/approved-list" element={<ProtectedRoute role="ADMIN"><ApprovedList /></ProtectedRoute>} />
                         <Route path="/passed-list" element={<ProtectedRoute role="ADMIN"><PassedList /></ProtectedRoute>} />
+                        <Route path='/add-admin' element={<ProtectedRoute role="ADMIN"><AddAdmin/></ProtectedRoute>}/>
                     </Route>
 
                     {/* Verifier routes */}
                     <Route element={<VerifierLayout />}>
                         <Route path="/check-home" element={<ProtectedRoute role="VERIFIER"><CheckHome /></ProtectedRoute>} />
                         <Route path="/check-verify" element={<ProtectedRoute role="VERIFIER"><CheckVerify /></ProtectedRoute>} />
+                        <Route path="/add-verifier" element={<ProtectedRoute role="VERIFIER"><AddVerifier /></ProtectedRoute>} />
+
                     </Route>
 
                     {/* Redirect to login for any undefined routes */}
