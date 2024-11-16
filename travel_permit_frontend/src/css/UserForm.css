@@ -12,6 +12,7 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   font-family: 'poppins';
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .form-head {

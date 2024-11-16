@@ -46,4 +46,5 @@ public interface Service {
 
     Long countFromPlace(String state);
 
+    UserForm rejectApplication(Integer id);
 }

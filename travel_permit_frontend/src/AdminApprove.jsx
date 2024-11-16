@@ -56,6 +56,21 @@ export default function Approval() {
     }
   };
 
+  const handleReject = async(id) =>{
+    try{
+      await fetch(`http://localhost:8080/admin/reject/${id}`,{
+        method:"PUT",
+        headers:{
+          "Content-Type":"application/json",
+          Authorization:`Bearer ${token}`
+        }
+      })
+      window.location.reload();
+    }catch(error){
+      console.log("Error in Rejecting Application",error)
+    }
+  }
+
   return (
     <div>
       <div className="approval-wrap">
@@ -100,7 +115,9 @@ export default function Approval() {
               </p>
             </div>
             <div className="Btn-container-approval">
-              <button className="btn-reject">Reject</button>
+              <button className="btn-reject"
+              onClick={()=>handleReject(show.id)}
+              >Reject</button>
               <button
                 className="btn-approval"
                 onClick={() => handleStatus(show.id)}

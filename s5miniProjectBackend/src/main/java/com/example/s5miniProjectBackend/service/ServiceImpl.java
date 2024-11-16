@@ -129,4 +129,15 @@ public class ServiceImpl implements Service{
         return userFormRepository.countByFromPlace(fromPlace);
     }
 
+    @Override
+    public UserForm rejectApplication(Integer id) {
+        Optional<UserForm> user = userFormRepository.findById(id);
+        if(user.isPresent()){
+            UserForm existingUser = user.get();
+            existingUser.setStatus("Rejected");
+            userFormRepository.save(existingUser);
+        }
+        return null;
+    }
+
 }

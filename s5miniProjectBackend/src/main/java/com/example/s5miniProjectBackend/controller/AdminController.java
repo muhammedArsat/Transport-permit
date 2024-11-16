@@ -66,6 +66,13 @@ public ResponseEntity<UserForm> editStatus(@PathVariable Integer id)
     return  ResponseEntity.ok(userForm);
 }
 
+@PutMapping("/reject/{id}")
+public ResponseEntity<UserForm> rejectApplication(@PathVariable Integer id)
+{
+    UserForm userForm = service.rejectApplication(id);
+    return ResponseEntity.ok(userForm);
+}
+
 
 
 
