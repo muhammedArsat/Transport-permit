@@ -136,7 +136,7 @@ function Form() {
   useEffect(() => {
     setTimeout(() => {
       setMessage(false);
-    }, 3000);
+    }, 5000);
 
     return () => {
       clearTimeout();
@@ -222,7 +222,7 @@ function Form() {
             return response.text();
           })
           .then((message) => {
-            window.location.reload();
+           
             setIsSuccess(true);
             setMessage(true);
   
@@ -465,7 +465,7 @@ function Form() {
                 )}
               </div>
               <div className="button-group">
-                <button onClick={handleClick}>NEXT</button>
+                <button onClick={handleClick}>Pay</button>
               </div>
             </form>
           </div>

@@ -89,7 +89,7 @@ const MyPermits = () => {
 
                   <p>
                     <strong>Status:</strong>
-                    {permit.status === "Pending" ? (
+                    {permit.status === "pending" ? (
                       <span style={{ color: "orange" }}>Pending</span>
                     ) : permit.status === "Approved" ? (
                       <span style={{ color: "green" }}>Approved</span>

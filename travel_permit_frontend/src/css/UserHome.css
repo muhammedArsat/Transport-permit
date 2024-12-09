@@ -11,6 +11,9 @@
     padding: 20px;
     max-width: 90vw; /* Responsive width */
     box-sizing: border-box;
+    text-align: left;
+    margin-top: 0px;
+ 
 
   }
   
