@@ -25,6 +25,8 @@ import NotFound from './NotFound';
 import AddVerifier from './Verifier';
 import AddAdmin from './AddAdmin';
 
+import {ToastContainer} from 'react-toastify'
+ 
 function App() {
     const [loading, setLoading] = useState(true);
     const [isAuthenticated, setIsAuthenticated] = useState(true);
@@ -100,6 +102,7 @@ function App() {
                     <Route path="*" element={<NotFound/>}/>
                 </Routes>
             </div>
+            <ToastContainer/>
         </BrowserRouter>
     );
 }

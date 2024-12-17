@@ -4,6 +4,8 @@ import "./css/LoginRegister.css";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import loadingImg from "./images/loginload.svg";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -102,13 +104,13 @@ export default function Register() {
       setTimeout(() => {
         setLoading(false); // Reset loading state after 1.5 seconds
         if (data.statusCode === 200) {
-          alert("Registration successful!");
+          toast.success("Registered Successfully");
           navigate("/");
         } else if (data.message === "User already registered") {
-          alert("User already registered. Please log in.");
+          toast.warning("User Already Registered")
           navigate("/");
         } else {
-          alert("Registration failed. Please try again.");
+          toast.error("Error Occured in registration");
         }
       }, 1500); // 1.5 seconds delay
     } catch (error) {
