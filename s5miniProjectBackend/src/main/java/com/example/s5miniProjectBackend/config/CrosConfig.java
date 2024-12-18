@@ -15,7 +15,7 @@ public class CrosConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Added OPTIONS method for preflight requests
-                        .allowedOrigins("http://localhost:3000") // Specify your frontend URL
+                        .allowedOrigins("http://localhost:3000","http://localhost:3001","http://localhost:3002") // Specify your frontend URL
                         .allowedHeaders("*") // Allow all headers
                         .allowCredentials(true); // Allow credentials (like cookies)
             }
