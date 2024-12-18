@@ -4,26 +4,74 @@ import './css/AdminHomePage.css'
 export default function AdminHomePage() {
   return (
     <div>
-   
-      <div className="info" >
-        What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing
-        and typesetting industry. Lorem Ipsum has been the industry's standard
-        dummy text ever since the 1500s, when an unknown printer took a galley
-        of type and scrambled it to make a type specimen book. It has survived
-        not only five centuries, but also the leap into electronic typesetting,
-        remaining essentially unchanged. It was popularised in the 1960s with
-        the release of Letraset sheets containing Lorem Ipsum passages, and more
-        recently with desktop publishing software like Aldus PageMaker including
-        versions of Lorem Ipsum. Why do we use it? It is a long established fact
-        that a reader will be distracted by the readable content of a page when
-        looking at its layout. The point of using Lorem Ipsum is that it has a
-        more-or-less normal distribution of letters, as opposed to using
-        'Content here, content here', making it look like readable English. Many
-        desktop publishing packages and web page editors now use Lorem Ipsum as
-        their default model text, and a search for 'lorem ipsum' will uncover
-        many web sites still in their infancy. Various versions have evolved
-        over the years, sometimes by accident, sometimes on purpose (injected
-        humour and the like).
+    <div className="info">
+        <h2>
+          1.User Instructions for Applying Transport Permits
+        </h2>
+        <br />{" "}
+        <h3>
+          Types of Applications You can apply for two types of transport
+          permits:
+        </h3>{" "}<br/>
+        <p>1. Normal Permit</p> <p>2. Takkal Permit (Urgent Service)</p>
+        <br />
+        <h2 >2. Key Differences Between Normal and Takkal Permits</h2>
+        <br />
+        <div className="tb-container" style={{overflow:"scroll"}}>
+
+        <table >
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Normal Permit</th>
+              <th>Takkal Permit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Cost</td>
+              <td>Standard Changes</td>
+              <td>20% Higher Than Normal Permit</td>
+            </tr>
+            <tr>
+              <td>Application Time</td>
+              <td>Open All Day</td>
+              <td>Only Available: 11 AM - 12 PM</td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+
+        <br />
+        <h2 style={{ color: "red" }}>3. Important Note</h2>
+        <br />
+        <ul>
+
+        <ol>
+        <p>
+          1. Ensure you choose the correct type of permit based on your urgency and
+          budget.
+        </p>
+        </ol>
+        <ol>
+        <p>
+          2. Takkal Permit submissions will not be accepted outside the designated
+          time slot <span style={{color:"red"}}>(11:00 AM to 12:00 PM)</span>.
+        </p>
+        </ol>
+        <ol>
+        <p>
+          3. Payment adjustments for Takkal Permits will reflect automatically
+          during the application process.
+        </p>
+        </ol>
+        <ol>
+        <p>
+         4.  Double-check all details before submitting the application to avoid
+          errors.
+        </p>
+        </ol>
+        </ul>
       </div>
     </div>
   );
