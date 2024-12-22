@@ -104,7 +104,7 @@ export default function Register() {
       setTimeout(() => {
         setLoading(false); // Reset loading state after 1.5 seconds
         if (data.statusCode === 200) {
-          toast.success("Registered Successfully");
+          toast.success("Registered Successful");
           navigate("/");
         } else if (data.message === "User already registered") {
           toast.warning("User Already Registered")

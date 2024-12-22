@@ -67,6 +67,11 @@ export default function CheckHome() {
               avoid errors.
             </p>
           </ol>
+          <ol>
+            <p style={{color:"red"}}>
+              <span>NOTE</span>If Your Permit gets Rejected , it is due to different reasons such as Fine Pending, Pending Cases,etc...
+            </p>
+          </ol>
         </ul>
       </div>
     </div>
